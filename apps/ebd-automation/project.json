@@ -1,0 +1,67 @@
+{
+  "name": "ebd-automation",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ebd-automation/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/ebd-automation",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/ebd-automation/src/main.ts",
+        "tsConfig": "apps/ebd-automation/tsconfig.app.json",
+        "assets": ["apps/ebd-automation/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "ebd-automation:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "ebd-automation:build:development"
+        },
+        "production": {
+          "buildTarget": "ebd-automation:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/ebd-automation/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

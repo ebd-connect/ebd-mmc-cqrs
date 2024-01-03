@@ -1,0 +1,18 @@
+---
+to: libs/api/<%=contextFileName %>-command/src/<%=eventStreamFileName %>/<%=commandFileName%>.http
+force: true
+---
+### <%=CommandName%> Command
+POST http://localhost:3100/
+Content-Type: application/json
+
+{
+"command": "<%=CommandName%>",
+  "payload": {
+<% command.facts.map( (fact,i) => {%>     "<%=h.changeCase.camel(fact.fact.name)%>" : "<%=fact.fact.value ?? ''%>"<%if (i!==command.facts.length-1) {%>,<%}%>
+<% }) -%>
+  }
+}
+
+
+

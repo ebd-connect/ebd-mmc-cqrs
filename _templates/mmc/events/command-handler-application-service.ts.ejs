@@ -1,0 +1,24 @@
+---
+inject: true
+to: libs/backend/<%=contextFileName %>/src/application/<%=eventStreamFileName%>-application-service.ts
+after: <%=CommandName%>
+before: //end <%=CommandName%>
+after_not_found: //commandHandlers
+---
+  @commandHandler({ name: '<%=CommandName%>' })
+<%if (isStartOfEventStream) {%>
+  async <%=commandName%>(command: <%=CommandName%>, { eventSourcing }: CommandContext): CommandReturnType<<%=CommandName%>> {
+<%if (!events[eventIndex].event.facts.find((item) => item.fact.name===eventStreamIdentifier)) {-%>
+    const <%=eventStreamIdentifier%>= command?.<%=eventStreamIdentifier%> ? command?.<%=eventStreamIdentifier%> : uuid();
+<%} else {%>    const <%=eventStreamIdentifier%>= uuid()<%}%>
+    await eventSourcing.create(<%=EventStreamName%>, <%=eventStreamIdentifier%>, (eventStream) => eventStream.<%=commandName%>(<%=eventStreamIdentifier%>, command)
+  );
+  return { <%=eventStreamIdentifier%> };
+  }<%} else {-%>
+  async <%=commandName%>(command: <%=CommandName%>, { eventSourcing }: CommandContext) {
+    await eventSourcing.load(<%=EventStreamName%>, command.<%=eventStreamIdentifier%>, (eventStream) =>
+      eventStream.<%=commandName%>(command)
+    );
+  }
+<%}%>
+  //end <%=CommandName%>

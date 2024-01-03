@@ -1,0 +1,8 @@
+---
+to: libs/backend/<%=contextFileName %>/src/domain/<%=eventStreamFileName%>.ts
+inject: true
+prepend: true
+skip_if: import { <%=CommandName%> }
+---
+import { <%=CommandName%> } from '@api/<%=contextFileName%>-command';
+import { <%=EventName%> } from '@api/<%=contextFileName%>-event';

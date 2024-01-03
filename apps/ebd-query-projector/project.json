@@ -1,0 +1,67 @@
+{
+  "name": "ebd-query-projector",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ebd-query-projector/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/ebd-query-projector",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/ebd-query-projector/src/main.ts",
+        "tsConfig": "apps/ebd-query-projector/tsconfig.app.json",
+        "assets": ["apps/ebd-query-projector/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "ebd-query-projector:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "ebd-query-projector:build:development"
+        },
+        "production": {
+          "buildTarget": "ebd-query-projector:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/ebd-query-projector/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

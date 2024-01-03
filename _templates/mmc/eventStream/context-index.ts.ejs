@@ -1,0 +1,6 @@
+---
+inject: true
+to: libs/backend/<%=contextFileName %>/src/index.ts
+append: true
+---
+export * from './application/<%=eventStreamFileName%>-app-config';

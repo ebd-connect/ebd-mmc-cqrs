@@ -1,0 +1,67 @@
+{
+  "name": "ebd-command",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ebd-command/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/ebd-command",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/ebd-command/src/main.ts",
+        "tsConfig": "apps/ebd-command/tsconfig.app.json",
+        "assets": ["apps/ebd-command/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "ebd-command:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "ebd-command:build:development"
+        },
+        "production": {
+          "buildTarget": "ebd-command:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/ebd-command/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

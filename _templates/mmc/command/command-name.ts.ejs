@@ -1,0 +1,13 @@
+---
+to: libs/api/<%=contextFileName %>-command/src/<%=eventStreamFileName %>/<%=commandFileName%>.ts
+force: true
+---
+import { command, <%if (isStartOfEventStream) {%>Responding<%}%>Command } from '@ebd-connect/cqrs-framework';
+
+@command('<%=CommandName%>')
+export class <%=CommandName%> implements <%if (isStartOfEventStream) {%>Responding<%}%>Command {
+  constructor(
+<% command.facts.map( (fact) => {%>    public readonly <%=h.changeCase.camel(fact.fact.name)%> : <%=fact.fact.factValueType.dataTypes[0].dataType.name%>,
+<% }) -%>  ) {}
+<%if (isStartOfEventStream) {%>  $responseType!: { trialId: string }<%}%>
+}

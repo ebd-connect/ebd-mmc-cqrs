@@ -1,0 +1,7 @@
+---
+inject: true
+to: apps/ebd-command/src/main.ts
+after:   commandHandlers
+skip_if:
+---
+    ...<%=contextName%>CommandHandlers,

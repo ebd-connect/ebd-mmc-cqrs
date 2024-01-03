@@ -1,0 +1,25 @@
+---
+to: libs/backend/<%=contextFileName %>/project.json
+force: true
+unless_exists: true
+---
+{
+  "name": "<%=contextFileName %>",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/backend/<%=contextFileName %>/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/backend/<%=contextFileName %>/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

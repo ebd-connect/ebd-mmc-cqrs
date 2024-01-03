@@ -1,0 +1,16 @@
+---
+to: libs/backend/<%=contextFileName %>/src/domain/<%=eventStreamFileName%>.ts
+force: true
+unless_exists: true
+---
+import {
+  AggregateRoot,
+  eventSourcingHandler,
+} from '@ebd-connect/cqrs-framework';
+
+export class <%=EventStreamName%> extends AggregateRoot {
+<%eventStream.facts.map( (fact) => {%>  private <%=h.changeCase.camel(fact.name)%>! : <%=fact.factValueType.dataType.name%>;
+<% }) -%>
+  //when
+  //end when
+}

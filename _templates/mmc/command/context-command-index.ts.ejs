@@ -1,0 +1,7 @@
+---
+inject: true
+to: libs/api/<%=contextFileName %>-command/src/index.ts
+append: true
+skip-if: export * from './<%=eventStreamFileName%>/<%=commandFileName%>';
+---
+export * from './<%=eventStreamFileName%>/<%=commandFileName%>';

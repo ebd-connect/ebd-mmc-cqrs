@@ -1,0 +1,11 @@
+---
+to: libs/api/<%=contextFileName %>-event/src/<%=eventStreamFileName %>/<%=eventFileName%>.ts
+force: true
+---
+import { Event } from '@ebd-connect/cqrs-framework';
+
+export class <%= EventName %> implements Event {
+  constructor(
+<% events[eventsIndex].event.facts.map( (fact) => {%>    public readonly <%=h.changeCase.camel(fact.fact.name)%> : <%=fact.fact.factValueType.dataTypes[0].dataType.name%>,
+<% }) -%>  ) {}
+}

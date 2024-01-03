@@ -1,0 +1,7 @@
+---
+inject: true
+to: libs/backend/<%=contextFileName %>/src/application/<%=eventStreamFileName%>-app-config.ts
+skip_if: <%=EventStreamName%>ApplicationService,%>,
+after: //services
+---
+  <%=EventStreamName%>ApplicationService,

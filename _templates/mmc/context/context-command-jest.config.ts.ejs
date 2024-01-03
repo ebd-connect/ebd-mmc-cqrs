@@ -1,0 +1,16 @@
+---
+to: libs/api/<%=contextFileName %>-command/jest.config.ts
+force: true
+unless_exists: true
+---
+/* eslint-disable */
+export default {
+  displayName: '<%=contextFileName %>-command',
+  preset: '../../../jest.preset.js',
+  testEnvironment: 'node',
+  transform: {
+    '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
+  },
+  moduleFileExtensions: ['ts', 'js', 'html'],
+  coverageDirectory: '../../../coverage/libs/api/<%=contextFileName %>-command',
+};

@@ -1,0 +1,7 @@
+---
+inject: true
+to: apps/ebd-command/src/main.ts
+prepend: true
+skip_if: import { <%=contextName%>CommandHandlers
+---
+import { <%=contextName%>CommandHandlers } from '@backend/<%=contextFileName%>';

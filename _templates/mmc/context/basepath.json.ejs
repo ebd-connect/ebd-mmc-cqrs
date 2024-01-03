@@ -1,0 +1,16 @@
+---
+inject: true
+to: tsconfig.base.json
+after: paths
+skip_if: api/<%=contextFileName%>
+---
+      "@api/<%=contextFileName%>-command": ["libs/api/<%=contextFileName%>-command/src/index.ts"],
+      "@api/<%=contextFileName%>-event": ["libs/api/<%=contextFileName%>-event/src/index.ts"],
+      "@api/<%=contextFileName%>-query": ["libs/api/<%=contextFileName%>-query/src/index.ts"],
+      "@backend/<%=contextFileName%>": ["libs/backend/<%=contextFileName%>/src/index.ts"],
+      "@backend/<%=contextFileName%>-automation": [
+      "libs/backend/<%=contextFileName%>-automation/src/index.ts"
+      ],
+      "@backend/<%=contextFileName%>-query-projector": [
+      "libs/backend/<%=contextFileName%>-query-projector/src/index.ts"
+      ]
