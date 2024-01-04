@@ -1,0 +1,7 @@
+---
+inject: true
+prepend: true
+to: libs/backend/<%=contextFileName %>/src/application/<%=eventStreamFileName%>-application-service.ts
+skip_if: v4 as uuid
+---
+<%if(isStartOfEventStream) {%>import { v4 as uuid } from 'uuid';<%}%>
