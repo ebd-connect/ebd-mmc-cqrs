@@ -3,7 +3,6 @@ to: libs/backend/<%=contextFileName %>/src/application/<%=eventStreamFileName%>-
 unless_exists: true
 ---
 import { CommandContext, commandHandler,<%if(isStartOfEventStream) {%>CommandReturnType<%}%> } from '@ebd-connect/cqrs-framework';
-<%if(isStartOfEventStream) {%>import { v4 as uuid } from 'uuid';<%}%>
 
 export class <%=EventStreamName%>ApplicationService {
   //commandHandlers

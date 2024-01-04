@@ -9,7 +9,7 @@ import {
 } from '@ebd-connect/cqrs-framework';
 
 export class <%=EventStreamName%> extends AggregateRoot {
-<%eventStream.facts.map( (fact) => {%>  private <%=h.changeCase.camel(fact.name)%>! : <%=fact.factValueType.dataType.name%>;
+<%eventStream.facts.map( (fact) => {%>  private <%=h.changeCase.camel(fact.name)%>! : <%=fact.factValueTypes[0].dataType.name%>;
 <% }) -%>
   //when
   //end when
