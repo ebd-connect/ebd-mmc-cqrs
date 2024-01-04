@@ -1,5 +1,3 @@
-import { invoiceSentCommandHandlers } from '@backend/invoice-sent';
-
 import { v4 as uuid } from 'uuid';
 import {
   AxonApplication,
@@ -14,10 +12,6 @@ const AXON_HOST = process.env.AXON_HOST ?? 'localhost:8124';
 configLogger();
 const axonConnector = new AxonApplication({
   commandHandlers: [
-    ...invoiceSentCommandHandlers,
-
-    ...invoiceSentCommandHandlers,
-
     //
   ],
   connection: {
